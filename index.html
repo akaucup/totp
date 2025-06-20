@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple OTP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="shortcut icon" href="assets/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+<link rel="manifest" href="assets/site.webmanifest" />
+
+<!-- Basic Meta Tags -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="title" content="Simple OTP Authenticator" />
+<meta name="description" content="A simple TOTP-based 2FA authenticator app built with JavaScript and OTPAuth.js." />
+<meta name="keywords" content="OTP, TOTP, Authenticator, 2FA, JavaScript, OTPAuth" />
+<meta name="author" content="yusupmabd" />
+
+<!-- Open Graph (for social media like Facebook, LinkedIn) -->
+<meta property="og:title" content="Simple OTP Authenticator" />
+<meta property="og:description" content="A lightweight 2FA TOTP authenticator in your browser." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://yourdomain.com" />
+<meta property="og:image" content="./assets/thumbnail.png" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Simple OTP Authenticator" />
+<meta name="twitter:description" content="A lightweight 2FA TOTP authenticator in your browser." />
+<meta name="twitter:image" content="./assets/thumbnail.png" />
+
+  </head>
+  <body>
+    <div class="container">
+      <h1>TOTP Token</h1>
+      <form id="token-form">
+        <input type="text" id="label" placeholder="App Name" required />
+        <input type="text" id="secret" placeholder="Secret Key" required />
+        <button type="submit">Add</button>
+      </form>
+      <div class="buttons">
+        <button onclick="exportTokens()">Export</button>
+        <input type="file" id="import-file" accept="application/json" style="display: none;" />
+        <button onclick="document.getElementById('import-file').click()">Import</button>
+      </div>
+      <div id="progress-wrapper">
+        <div id="progress-container">
+          <div id="progress-bar"></div>
+        </div>
+        <div id="countdown-text">30s</div>
+      </div>
+      <input type="text" id="search-input" placeholder="🔍 Search..." />
+      <ul id="token-list"></ul>
+    </div>
+    <footer id="footer">
+  © 2025 TOTP Generator. All rights reserved.
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/otpauth/dist/otpauth.umd.min.js"></script>
+    <script src="assets/script.js"></script>
+  </body>
+</html>
