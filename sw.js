@@ -9,6 +9,10 @@ const URLS_TO_CACHE = [
   "/assets/favicon.svg",
   "/assets/favicon.ico",
   "/assets/apple-touch-icon.png",
+  "/assets/Inter-Regular.woff2",
+  "/assets/Inter-Regular.woff",
+  "/assets/Inter-Italic.woff2",
+  "/assets/Inter-Italic.woff",
   "https://cdn.jsdelivr.net/npm/otpauth/dist/otpauth.umd.min.js"
 ];
 
