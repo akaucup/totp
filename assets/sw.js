@@ -2,8 +2,8 @@ const CACHE_NAME = "otp-cache-v1";
 const URLS_TO_CACHE = [
   "/",
   "/index.html",
-  "/style.css",
-  "/script.js",
+  "assets/style.css",
+  "assets/script.js",
   "https://cdn.jsdelivr.net/npm/otpauth/dist/otpauth.umd.min.js",
 ];
 
