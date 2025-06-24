@@ -14,15 +14,26 @@ const URLS_TO_CACHE = [
 
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(async cache => {
-      await Promise.all(URLS_TO_CACHE.map(async url => {
-        try {
-          const response = await fetch(url, { mode: 'no-cors' });
-          await cache.put(url, response);
-        } catch (err) {
-          console.warn(`⚠️ Failed to cache: ${url}`, err);
-        }
-      }));
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(URLS_TO_CACHE);
+    }).catch(err => {
+      console.warn("⚠️ Some files failed to cache", err);
     })
+  );
+});
+
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+    )
   );
 });
