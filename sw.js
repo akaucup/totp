@@ -13,44 +13,37 @@ const URLS_TO_CACHE = [
   "https://cdn.jsdelivr.net/npm/otpauth/dist/otpauth.umd.min.js"
 ];
 
-// Install event: cache file
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return Promise.all(
-        URLS_TO_CACHE.map(url =>
-          fetch(url)
-            .then(response => {
-              if (!response.ok) throw new Error(`Request failed for ${url}`);
-              return cache.put(url, response.clone());
-            })
-            .catch(err => {
-              console.error("❌ Failed to cache:", url, err);
-            })
-        )
-      );
+    caches.open(CACHE_NAME).then(async cache => {
+      for (const url of URLS_TO_CACHE) {
+        try {
+          const response = await fetch(url);
+          if (response.ok) {
+            await cache.put(url, response);
+          } else {
+            console.warn(`⚠️ Not OK response: ${url}`, response.status);
+          }
+        } catch (err) {
+          console.warn(`⚠️ Failed to cache: ${url}`, err);
+        }
+      }
     })
   );
 });
 
-// Fetch event: respond from cache or network
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      return cachedResponse || fetch(event.request);
+    caches.match(event.request).then(resp => {
+      return resp || fetch(event.request);
     })
   );
 });
 
-// Activate event: clean up old cache
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(cacheNames =>
-      Promise.all(
-        cacheNames
-          .filter(name => name !== CACHE_NAME)
-          .map(name => caches.delete(name))
-      )
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
     )
   );
 });
