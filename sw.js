@@ -4,6 +4,12 @@ const URLS_TO_CACHE = [
   "/index.html",
   "/assets/style.css",
   "/assets/script.js",
+  "/assets/site.webmanifest",
+  "assets/favicon-96x96.png",
+  "assets/favicon.svg",
+  "assets/favicon.ico",
+  "assets/apple-touch-icon.png",
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
   "https://cdn.jsdelivr.net/npm/otpauth/dist/otpauth.umd.min.js"
 ];
 
