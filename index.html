@@ -90,18 +90,14 @@
     <script src="https://cdn.jsdelivr.net/npm/otpauth/dist/otpauth.umd.min.js"></script>
     <script src="assets/script.js"></script>
     <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("assets/sw.js", {
-            scope: "./",
-          })
-          .then(() => {
-            console.log("Service Worker registered");
-          })
-          .catch((err) => {
-            console.error("Service Worker registration failed:", err);
-          });
-      }
-    </script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('assets/sw.js').then(() => {
+      console.log("Service Worker registered");
+    }).catch(err => {
+      console.error("Service Worker registration failed:", err);
+    });
+  }
+</script>
+
   </body>
 </html>
